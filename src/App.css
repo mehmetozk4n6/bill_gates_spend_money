@@ -75,6 +75,10 @@ html {
   max-width: 100%;
   object-fit: contain;
 }
+.btnBuy:disabled {
+  background: #f1f2f6 !important;
+  color: #333;
+}
 .btnBuy {
   background-color: #26c584;
   cursor: pointer;

@@ -1,11 +1,17 @@
 import React from "react";
 import { data } from "../../utils/data";
 import { useDispatch, useSelector } from "react-redux";
-import { buyProperty, sellProperty, selectItems } from "../../redux/moneySlice";
+import {
+  buyProperty,
+  sellProperty,
+  selectItems,
+  selectValue,
+} from "../../redux/moneySlice";
 
 function Items() {
   const dispatch = useDispatch();
   const products = useSelector(selectItems);
+  const value = useSelector(selectValue);
 
   const findItem = (item) => {
     let addedItem = products.find((product) => product.title === item.title);
@@ -58,6 +64,7 @@ function Items() {
                 }
               />
               <button
+                disabled={value < 0}
                 className="item-buy btnBuy"
                 onClick={() => buyItems(1, item.price, item.title)}
               >
