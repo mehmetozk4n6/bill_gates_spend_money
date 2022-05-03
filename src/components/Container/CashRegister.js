@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { selectValue } from "../../redux/moneySlice";
 
+import Swal from "sweetalert2";
+
 import CountUp from "react-countup";
 
 function CashRegister() {
@@ -9,8 +11,23 @@ function CashRegister() {
 
   let nonsense = value + diffMoney;
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   if (value < 0) {
-    alert("Bill's in debt.");
+    Toast.fire({
+      title: "Bill's in debt!",
+      icon: "error",
+    });
   }
   return (
     <div className="money-bar">
